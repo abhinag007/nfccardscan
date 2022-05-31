@@ -1,6 +1,5 @@
 package com.nfc.scan.mfccardscan;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,8 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.nfc.scan.mfccardscan.lib.CtlessCardService;
 import com.nfc.scan.mfccardscan.lib.enums.BeepType;
 import com.nfc.scan.mfccardscan.lib.model.Application;
@@ -19,7 +16,6 @@ import com.nfc.scan.mfccardscan.lib.model.Card;
 import com.nfc.scan.mfccardscan.lib.model.LogMessage;
 import com.nfc.scan.mfccardscan.ui.ApduLogActivity;
 import com.nfc.scan.mfccardscan.ui.util.AppUtils;
-import com.nfc.scan.mfccardscan.lib.enums.BeepType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +28,8 @@ import io.flutter.embedding.android.FlutterActivity;
 
 public class MainActivity extends FlutterActivity implements CtlessCardService.ResultListener {
 
-    private String TAG = MainActivity.class.getName();
+//    private val METHOD_CHANNEL_NAME = "com.nfc.transaction/method";
+    private String TAG = com.nfc.scan.mfccardscan.ui.MainActivity.class.getName();
 
     private LinearLayout llContainer;
 
