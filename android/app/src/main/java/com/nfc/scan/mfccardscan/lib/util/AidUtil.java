@@ -4,11 +4,6 @@ import com.nfc.scan.mfccardscan.lib.enums.CardType;
 
 import java.util.Arrays;
 
-/**
- * @author AliMertOzdemir
- * @class AidUtil
- * @created 16.04.2020
- */
 public final class AidUtil {
 
     /*

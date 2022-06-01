@@ -11,11 +11,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author AliMertOzdemir
- * @class AflUtil
- * @created 17.04.2020
- */
 public final class AflUtil {
 
     private static final String TAG = AflUtil.class.getName();

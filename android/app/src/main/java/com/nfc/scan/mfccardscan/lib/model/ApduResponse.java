@@ -2,11 +2,6 @@ package com.nfc.scan.mfccardscan.lib.model;
 
 import java.security.AccessControlException;
 
-/**
- * @author AliMertOzdemir
- * @class ApduResponse
- * @created 16.04.2020
- */
 public class ApduResponse {
 
     protected int mSw1 = 0x00;

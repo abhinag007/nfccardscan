@@ -7,11 +7,6 @@ import androidx.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * @author AliMertOzdemir
- * @class ApduUtil
- * @created 16.04.2020
- */
 public final class ApduUtil {
 
     private static String TAG = ApduUtil.class.getName();

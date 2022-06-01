@@ -1,89 +1,50 @@
 package com.nfc.scan.mfccardscan;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
+import com.nfc.scan.mfccardscan.lib.CtlessCardService;
+import com.nfc.scan.mfccardscan.lib.enums.BeepType;
+import com.nfc.scan.mfccardscan.lib.model.Application;
+import com.nfc.scan.mfccardscan.lib.model.Card;
+import com.nfc.scan.mfccardscan.lib.model.LogMessage;
+import com.nfc.scan.mfccardscan.ui.ApduLogActivity;
+import com.nfc.scan.mfccardscan.ui.util.AppUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.flutter.embedding.android.FlutterActivity;
-import io.flutter.embedding.engine.FlutterEngine;
-import io.flutter.plugin.common.MethodChannel;
 
-public class MainActivity extends FlutterActivity {
+public class NfcActivity extends FlutterActivity implements CtlessCardService.ResultListener {
 
-    private static final String CHANNEL = "com.nfc.transaction/method";
+    private String TAG = com.nfc.scan.mfccardscan.NfcActivity.class.getName();
 
-
-    private String TAG = com.nfc.scan.mfccardscan.MainActivity.class.getName();
-
-/*    private LinearLayout llContainer;
+//    private LinearLayout llContainer;
 
     private CtlessCardService mCtlessCardService;
 
-    private ProgressDialog mProgressDialog;
-    private AlertDialog mAlertDialog;
-*/
+//    private ProgressDialog mProgressDialog;
+//    private AlertDialog mAlertDialog;
 
     @Override
-    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
-        super.configureFlutterEngine(flutterEngine);
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
-                .setMethodCallHandler(
-                        (call, result) -> {
-                            if(call.method.equals("startNfcService")) {
-                                Intent i = new Intent(this, NfcActivity.class);
-                                startActivity(i);
-                            }
-                            String value = null;
-                            Bundle extras = getIntent().getExtras();
-                            if (extras != null) {
-                                value = extras.getString("type");
-                                Log.d(TAG, value);
-                            }
-//                            return value;
-
-
-                        }
-                );
-    }
-
-
-
-  /*  @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);*/
+        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
 
 //        llContainer = findViewById(R.id.ctless_container);
 
-//        mCtlessCardService = new CtlessCardService(this, this);
-
-//        private static final String CHANNEL = "com.nfc.transaction/method";
-
-      /*  GeneratedPluginRegistrant.registerWith(this);
-        new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler(
-                new MethodChannel.MethodCallHandler() {
-                    @Override
-                    public void onMethodCall(MethodCall call, MethodChannel.Result result) {
-                        if (call.method.equals("startNfcService")) {
-                            Intent intent = new Intent(this, NfcActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });*/
-//    }
-        /*
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-
-
-
-        }*/
+        mCtlessCardService = new CtlessCardService(this, this);
     }
 
-    /* @Override
+    @Override
     protected void onResume() {
         super.onResume();
         mCtlessCardService.start();
@@ -93,40 +54,40 @@ public class MainActivity extends FlutterActivity {
     public void onCardDetect() {
         Log.d(TAG, "ON CARD DETECTED");
         playBeep(BeepType.SUCCESS);
-        showProgressDialog();
+//        showProgressDialog();
     }
 
     @Override
     public void onCardReadSuccess(Card card) {
-        dismissProgressDialog();
+//        dismissProgressDialog();
         showCardDetailDialog(card);
     }
 
     @Override
     public void onCardReadFail(String error) {
         playBeep(BeepType.FAIL);
-        dismissProgressDialog();
+//        dismissProgressDialog();
         showAlertDialog("ERROR", error);
     }
 
     @Override
     public void onCardReadTimeout() {
         playBeep(BeepType.FAIL);
-        dismissProgressDialog();
-        AppUtils.showSnackBar(llContainer, "Timeout has been reached...", "OK");
+//        dismissProgressDialog();
+//        AppUtils.showSnackBar(llContainer, "Timeout has been reached...", "OK");
     }
 
     @Override
     public void onCardMovedSoFast() {
         playBeep(BeepType.FAIL);
-        dismissProgressDialog();
-        AppUtils.showSnackBar(llContainer, "Please do not remove your card while reading...", "OK");
+//        dismissProgressDialog();
+//        AppUtils.showSnackBar(llContainer, "Please do not remove your card while reading...", "OK");
     }
 
     @Override
     public void onCardSelectApplication(List<Application> applications) {
         playBeep(BeepType.FAIL);
-        dismissProgressDialog();
+//        dismissProgressDialog();
         showApplicationSelectionDialog(applications);
     }
 
@@ -150,27 +111,31 @@ public class MainActivity extends FlutterActivity {
         }
     }
 
-    private void showProgressDialog() {
+   /* private void showProgressDialog() {
         dismissAlertDialog();
         runOnUiThread(()-> mProgressDialog = AppUtils.showLoadingDialog(this, "Reading Card", "Please do not remove your card while reading..."));
     }
-
-    private void dismissProgressDialog() {
-        runOnUiThread(() -> mProgressDialog.dismiss());
-    }
+*/
+//    private void dismissProgressDialog() {
+//        runOnUiThread(() -> mProgressDialog.dismiss());
+//    }
 
     private void showAlertDialog(String title, String message) {
 
-        runOnUiThread(() -> {
+      /*  runOnUiThread(() -> {
             mAlertDialog = AppUtils.showAlertDialog(this, title, message, "OK", "SHOW APDU LOGS", false, (dialogInterface, button) -> {
                 mAlertDialog.dismiss();
             });
-        });
+        });*/
     }
 
-    private void showCardDetailDialog(Card card) {
-
-        runOnUiThread(() -> {
+    private String showCardDetailDialog(Card card) {
+        System.out.print(card.getCardType().getCardBrand());
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("type",card.getCardType().getCardBrand());
+        startActivity(intent);
+        return card.getCardType().getCardBrand();
+        /*runOnUiThread(() -> {
             String title = "Card Detail";
             String message =
                     "Card Brand : " + card.getCardType().getCardBrand() + "\n" +
@@ -196,7 +161,7 @@ public class MainActivity extends FlutterActivity {
                         break;
                 }
             });
-        });
+        });*/
     }
 
     private void showApplicationSelectionDialog(List<Application> applications) {
@@ -208,13 +173,15 @@ public class MainActivity extends FlutterActivity {
             index++;
         }
 
-        runOnUiThread(() -> {
+        /*runOnUiThread(() -> {
             String title = "Select One of Your Cards";
             mAlertDialog = AppUtils.showSingleChoiceListDialog(this, title, appNames, "OK", (dialogInterface, i) -> mCtlessCardService.setSelectedApplication(i));
-        });
+        });*/
     }
 
-    private void dismissAlertDialog() {
+  /*  private void dismissAlertDialog() {
         if(mAlertDialog != null)
             runOnUiThread(() -> mAlertDialog.dismiss());
     }*/
+
+}

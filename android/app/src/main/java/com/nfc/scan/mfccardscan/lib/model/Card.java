@@ -4,11 +4,7 @@ import com.nfc.scan.mfccardscan.lib.enums.CardType;
 
 import java.util.List;
 
-/**
- * @author AliMertOzdemir
- * @class Card
- * @created 21.04.2020
- */
+
 public class Card {
 
     private String pan;

@@ -1,10 +1,6 @@
 package com.nfc.scan.mfccardscan.lib.model;
 
-/**
- * @author AliMertOzdemir
- * @class AflObject
- * @created 17.04.2020
- */
+
 public class AflObject {
 
     private int sfi;

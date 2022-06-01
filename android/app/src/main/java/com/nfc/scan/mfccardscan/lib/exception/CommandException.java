@@ -1,10 +1,5 @@
 package com.nfc.scan.mfccardscan.lib.exception;
 
-/**
- * @author AliMertOzdemir
- * @class CommandException
- * @created 17.04.2020
- */
 public class CommandException extends Exception {
 
     public CommandException() {}

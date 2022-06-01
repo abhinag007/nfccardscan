@@ -1,10 +1,6 @@
 package com.nfc.scan.mfccardscan.lib.model;
 
-/**
- * @author AliMertOzdemir
- * @class Application
- * @created 21.04.2020
- */
+
 public class Application {
 
     private byte[] aid;
