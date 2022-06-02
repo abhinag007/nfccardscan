@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mfccardscan/testandroid.dart';
 
+import 'Transaction.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -55,7 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TestAndroid())),
+        // onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TestAndroid())),
+        onPressed: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Transaction())),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
